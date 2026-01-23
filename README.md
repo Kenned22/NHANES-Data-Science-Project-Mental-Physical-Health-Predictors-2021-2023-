@@ -70,6 +70,8 @@ Each of the nine symptom items (`DPQ010`–`DPQ090`) is scored on a 4-point scal
 
 Responses coded as **7 (Refused)** or **9 (Don’t know)** were treated as missing and excluded from scoring.
 
+PHQ‑9 total scores were calculated only for participants with complete responses to all nine symptom items, following NHANES analytic guidelines. Responses coded as ‘Refused’ or ‘Don’t know’ were treated as missing, and participants with incomplete PHQ‑9 data were excluded from depression scoring.
+
 ### Total PHQ-9 Score
 A total PHQ-9 score was calculated by summing the nine symptom items, yielding a possible range from **0 to 27**. Scores were only computed for participants with complete responses to all nine items, consistent with NHANES analytic guidance.
 
