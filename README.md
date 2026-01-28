@@ -1,22 +1,10 @@
 # NHANES Sleep, Health, and Depression Analysis (2021–2023)
 
-This repository contains cleaned and merged data from the **National Health and Nutrition Examination Survey (NHANES) 2021–2023** public-use files. The project explores relationships between **sleep**, **physical health behaviors**, **biomarkers**, **socioeconomic factors**, and **depression severity** in U.S. adults.
+This repository contains cleaned and merged data from the **National Health and Nutrition Examination Survey (NHANES) 2021–2023** public-use files. The project explores relationships between sleep, physical health behaviors, biomarkers, socioeconomic factors, and depression outcomes in U.S. adults.
 
 All data are publicly available and provided by the **U.S. Centers for Disease Control and Prevention (CDC)**.
 
 NHANES Data Portal: https://wwwn.cdc.gov/nchs/nhanes/
-
----
-
-## Project Title
-
-**Examining the Potential Mediating Role of Inflammation (CRP) in the Relationship Between BMI and Depression Severity**
-
----
-
-## Research Question
-
-> **Does inflammation, as measured by C-Reactive Protein (CRP), mediate the relationship between Body Mass Index (BMI) and depression severity (PHQ-9 score) in U.S. adults?**
 
 ---
 
@@ -37,7 +25,7 @@ The following NHANES components were downloaded and merged using the participant
   - PHQ-9 items (`DPQ010`–`DPQ090`)
   - Total PHQ-9 depression score
   - Binary depression indicator (PHQ-9 ≥ 10)
-  - PHQ-9 severity classification
+  - Depression severity classification
 
 - **Inflammation (`HSCRP_L`)**
   - High-sensitivity C-reactive protein (CRP)
@@ -50,8 +38,7 @@ The following NHANES components were downloaded and merged using the participant
 
 - **Physical Activity (`PAQ_L`)**
   - Minutes of vigorous activity (`PAD680`)
-  - Frequency of moderate activity (`PAD810Q`)
-  - Time unit for moderate activity frequency (`PAD810U`) — per day, week, month, or year
+  - Frequency and units of moderate activity (`PAD810Q`, `PAD810U`)
   - Duration of moderate activity (`PAD820`)
 
 - **Occupation (`OCQ_L`)**
@@ -59,50 +46,19 @@ The following NHANES components were downloaded and merged using the participant
 
 ---
 
-## Engineered Variables
-
-During cleaning and preparation, several derived variables were created for analysis:
-
-- `phq9_score`: Total score across 9 PHQ-9 depression items (range: 0–27)
-- `phq9_severity`: Categorical label of depression severity (None, Mild, Moderate, etc.)
-- `is_depressed`: Binary indicator where 1 = PHQ-9 ≥ 10
-- `sleep_avg`: Weighted average sleep duration over a full week
-- `bmi`, `crp`, `age`: Renamed variables for clarity in modeling
-- `cigarettes_per_day`: Cleaned version of raw smoking variable; excludes invalid codes
-- `vigorous_activity_minutes`: Cleaned self-reported minutes of vigorous activity
-- `vigorous_activity_category`: Categorized activity level: None / Low / Moderate / High
-- `moderate_activity_frequency`: Frequency of moderate physical activity sessions
-- `moderate_activity_units`: Unit for frequency (e.g., per week, per day)
-- `moderate_activity_minutes`: Duration of each moderate activity session
-- `employment_status`: Simplified from NHANES employment codes (Working vs. Not Working)
-
----
-
 ## Project Focus
 
-This project investigates how BMI, inflammation, sleep, physical activity, smoking, and employment status relate to **depression severity (PHQ-9)** using statistical and machine learning methods.
-
-A specific focus is placed on whether **CRP mediates the relationship between BMI and depression**, which could offer insight into possible inflammatory pathways underlying comorbidity.
+This project investigates how sleep, physical activity, BMI, inflammation, smoking, work status, and socioeconomic status relate to **depression severity (PHQ-9)** using statistical and machine learning methods.
 
 ---
 
-## Planned Methods
+## Notes
 
-At least 3 empirical/statistical learning (ESL) methods were applied:
-
-- **Linear regression** to estimate total and direct effects (BMI → CRP, CRP → depression)
-- **Mediation analysis with bootstrapping** to estimate indirect effects and test the mediation pathway
-- **Generalized Additive Models (GAMs)** to explore non-linear effects (e.g., BMI on PHQ-9)
-- **Regression trees** to explore interaction effects and nonlinear variable splits
-
----
-
-## Missing Values Handling
-
-- PHQ-9 responses coded as `7` (Refused) or `9` (Don’t know) were excluded.
-- Special codes for missing data (e.g., 7777, 9999) were converted to `NA` in smoking, CRP, and activity variables.
-- All datasets were merged using `SEQN`, and rows with incomplete core variable data were dropped.
-- Final dataset includes **adults aged 18+** with valid depression screening and covariates.
+- Only **public-use NHANES data** were used.
+- Invalid PHQ-9 responses (7 = refused, 9 = don’t know) were treated as missing.
+- Special missing value codes (e.g., 7777, 9999) were cleaned to `NA` in activity and smoking variables.
+- All datasets were merged using `SEQN`.
+- This repository is intended for educational and research purposes.
 
 ---
 
@@ -121,7 +77,7 @@ Responses coded as **7 (Refused)** or **9 (Don’t know)** were treated as missi
 PHQ‑9 total scores were calculated only for participants with complete responses to all nine symptom items, following NHANES analytic guidelines.
 
 ### Total PHQ-9 Score
-A total PHQ-9 score was calculated by summing the nine symptom items, yielding a possible range from **0 to 27**.
+A total PHQ-9 score was calculated by summing the nine symptom items, yielding a possible range from **0 to 27**. Scores were only computed for participants with complete responses to all nine items.
 
 ### Depression Classification
 In addition to the continuous total score, a binary depression indicator was created using a standard clinical cutoff:
@@ -144,10 +100,52 @@ Spitzer, R. L., Kroenke, K., & Williams, J. B. (1999). Validation and utility of
 
 ---
 
+## Engineered Variables
+
+The final cleaned dataset includes the following derived features:
+
+- `phq9_score`: Continuous total score from PHQ-9 (0–27)
+- `phq9_severity`: Categorical label (None, Mild, Moderate, etc.)
+- `is_depressed`: Binary indicator (1 = PHQ-9 ≥ 10)
+- `sleep_avg`: Weighted weekly average based on weekday and weekend sleep
+- `bmi`, `crp`, `age`: Cleaned/renamed raw variables
+- `cigarettes_per_day`: Cleaned version of SMD641 (99 coded as NA)
+- `vigorous_activity_minutes`: Raw minutes of vigorous activity (PAD680)
+- `vigorous_activity_category`: Categorized (None, Low, Moderate, High)
+- `moderate_activity_frequency`: Frequency of moderate activity (PAD810Q)
+- `moderate_activity_units`: Units (per day/week/month/year)
+- `moderate_activity_minutes`: Duration of moderate sessions (PAD820)
+- `employment_status`: Recoded from OCD150 into “Working” vs “Not working”
+
+---
+
+## Missing Data Handling
+
+- PHQ-9 and other fields with invalid codes were filtered or recoded as NA.
+- Non-numeric codes like `7777`, `9999`, and `99` were removed before analysis.
+- Only complete cases for core variables were included in analysis-ready CSV.
+
+---
+
 ## Included Files
 
-- `nhanes_cleaned_2021_2023.csv` – Final cleaned and merged dataset with derived variables.
-- `variable_legend.xlsx` – Description of variables used and engineered for analysis.
+- `nhanes_cleaned_2021_2023.csv` – Fully cleaned and merged dataset with engineered variables
+- `variable_legend.xlsx` – Variable dictionary (raw + derived)
+
+---
+
+## Source Documentation
+
+All files used come from the NHANES 2021–2023 public release and can be found here:
+
+- [DEMO_L – Demographics](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/DEMO_L.htm)
+- [BMX_L – Body Measures (BMI)](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/BMX_L.htm)
+- [HSCRP_L – Inflammation (CRP)](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/HSCRP_L.htm)
+- [DPQ_L – Depression Screener (PHQ-9)](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/DPQ_L.htm)
+- [SLQ_L – Sleep](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/SLQ_L.htm)
+- [SMQ_L – Smoking](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/SMQ_L.htm)
+- [PAQ_L – Physical Activity](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/PAQY_L.htm)
+- [OCQ_L – Occupation](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/OCQ_L.htm)
 
 ---
 
