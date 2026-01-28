@@ -1,6 +1,6 @@
-# NHANES 2021–2022: BMI, Inflammation, and Depression Severity
+# NHANES 2021–2023: BMI, Inflammation, and Depression Severity
 
-This repository contains cleaned and merged data from the **National Health and Nutrition Examination Survey (NHANES) 2021–2022** public-use files. The project investigates the potential **mediating role of inflammation**—as measured by **C-reactive protein (CRP)**—in the relationship between **Body Mass Index (BMI)** and **depression severity** (PHQ-9 score) among U.S. adults.
+This repository contains cleaned and merged data from the **National Health and Nutrition Examination Survey (NHANES) 2021–2023** public-use files. The project investigates the potential **mediating role of inflammation**—as measured by **C-reactive protein (CRP)**—in the relationship between **Body Mass Index (BMI)** and **depression severity** (PHQ-9 score) among U.S. adults.
 
 All data are publicly available and provided by the **U.S. Centers for Disease Control and Prevention (CDC)**.
 
