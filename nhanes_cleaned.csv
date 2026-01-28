@@ -1,0 +1,38 @@
+Variable Name,Description
+SEQN,Unique participant identifier
+DPQ010 to DPQ090,"PHQ-9 depression symptom items (9 items, each scored 0–3)"
+DPQ100,Impact of symptoms on daily functioning
+phq9_score,Total PHQ-9 depression score (0–27)
+is_depressed,Binary indicator for moderate/severe depression (1 = PHQ-9 ? 10)
+phq9_severity,Categorical depression severity level
+SLD012,Average weekend sleep hours
+SLD013,Average weekday sleep hours
+sleep_weekend,Renamed from SLD012
+sleep_weekday,Renamed from SLD013
+sleep_avg,Weighted weekly average sleep ((5×weekday + 2×weekend)/7)
+RIDAGEYR,Age in years
+RIAGENDR,"Biological sex (1 = Male, 2 = Female)"
+gender,Labeled version of RIAGENDR (Male/Female)
+RIDRETH3,Race/ethnicity category
+race_ethnicity,Labeled version of RIDRETH3
+DMDHHSIZ,Total number of people in the household
+household_size,Renamed from DMDHHSIZ
+INDFMPIR,Income-to-poverty ratio
+income_poverty_ratio,Renamed from INDFMPIR
+LBXHSCRP,High-sensitivity C-reactive protein level (inflammation biomarker)
+crp,Renamed from LBXHSCRP
+BMXBMI,"Body Mass Index (BMI, kg/m²)"
+bmi,Renamed from BMXBMI
+SMD641,Average number of cigarettes smoked per day
+cigarettes_per_day,"Cleaned version of SMD641, excluding invalid codes"
+PAD680,Duration of vigorous activity in minutes (uncleaned)
+vigorous_activity_minutes,"Cleaned version of PAD680, NA if 7777 or 9999"
+vigorous_activity_category,Category: None / Low / Moderate / High
+PAD810Q,Frequency of moderate activity sessions
+moderate_activity_frequency,Cleaned version of PAD810Q
+PAD810U,Units for moderate activity frequency (D/W/M/Y)
+moderate_activity_units,Cleaned version of PAD810U (Per day/week/month/year)
+PAD820,Minutes per moderate activity session
+moderate_activity_minutes,Cleaned version of PAD820
+OCD150,Employment status (1–5 = Working / Not Working)
+employment_status,Categorized from OCD150: Working or Not working
