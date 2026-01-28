@@ -61,6 +61,80 @@ This project investigates how sleep, physical activity, BMI, inflammation, smoki
 - This repository is intended for educational and research purposes.
 
 ---
+Below are the official NHANES documentation links and relevant variables used in this project for each dataset component. All variables were pulled from the 2021–2023 public-use files and merged via `SEQN`.
+
+### Demographics (`DEMO_L`)
+📄 [Documentation](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/DEMO_L.htm)
+
+**Variables used:**
+- `RIDAGEYR` — Age (in years)
+- `RIAGENDR` — Gender
+- `RIDRETH3` — Race/Hispanic origin
+- `DMDHHSIZ` — Household size
+- `INDFMPIR` — Ratio of family income to poverty
+
+---
+
+### Body Measures (`BMX_L`)
+📄 [Documentation](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/BMX_L.htm)
+
+**Variables used:**
+- `BMXBMI` — Body Mass Index (kg/m²)
+
+---
+
+### Inflammation Biomarkers (`HSCRP_L`)
+📄 [Documentation](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/HSCRP_L.htm)
+
+**Variables used:**
+- `LBXCRP` — C-Reactive Protein (mg/dL)
+
+---
+
+### Depression Screener (`DPQ_L`)
+📄 [Documentation](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/DPQ_L.htm)
+
+**Variables used:**
+- `DPQ010`–`DPQ090` — PHQ-9 symptom items
+- Derived: `phq9_score` — Total depression severity score
+- Derived: `phq9_binary` — Binary indicator (PHQ-9 ≥ 10)
+
+---
+
+### Sleep (`SLQ_L`)
+📄 [Documentation](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/SLQ_L.htm)
+
+**Variables used:**
+- `SLD010H` — Hours of sleep on weekdays/workdays
+- `SLD012H` — Hours of sleep on weekends/non-workdays
+- Derived: `weekly_avg_sleep` — Weighted average weekly sleep duration
+
+---
+
+### Smoking & Tobacco Use (`SMQ_L`)
+📄 [Documentation](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/SMQ_L.htm)
+
+**Variables used:**
+- `SMD641` — Number of cigarettes smoked per day
+
+---
+
+### Physical Activity (`PAQY_L`)
+📄 [Documentation](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/PAQY_L.htm)
+
+**Variables used:**
+- `PAD615` — Minutes per day spent sitting
+- `PAD320` — Moderate-intensity activity days/week
+- `PAD360` — Moderate-intensity activity minutes/day
+
+---
+
+### Occupation (`OCQ_L`)
+📄 [Documentation](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/OCQ_L.htm)
+
+**Variables used:**
+- `OCD390G` — Number of hours worked last week
+---
 
 ## PHQ-9 Depression Scoring
 
