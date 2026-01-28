@@ -10,39 +10,51 @@ NHANES Data Portal: https://wwwn.cdc.gov/nchs/nhanes/
 
 ## Data Variables Included
 
-The following NHANES components were downloaded and merged using the participant identifier `SEQN`:
+The following NHANES components were downloaded and merged using the participant identifier `SEQN`. Variables were selected based on their relevance to BMI, inflammation, depression, and key behavioral and demographic covariates.
 
 - **Demographics (`DEMO_L`)**
-  - Age, gender, race/ethnicity
-  - Household size
-  - Income-to-poverty ratio (SES)
+  - `RIDAGEYR` — Age (in years)
+  - `RIAGENDR` — Gender
+  - `RIDRETH3` — Race / Hispanic origin
+  - `DMDHHSIZ` — Household size
+  - `INDFMPIR` — Income-to-poverty ratio (SES)
 
 - **Sleep (`SLQ_L`)**
-  - Weekday and weekend sleep duration
-  - Average weekly sleep (derived)
+  - `SLD012` — Hours of sleep on weekends/non-workdays
+  - `SLD013` — Hours of sleep on weekdays/workdays
+  - Derived: `sleep_avg` — Weighted average sleep duration per week
 
 - **Mental Health – Depression Screener (`DPQ_L`)**
-  - PHQ-9 items (`DPQ010`–`DPQ090`)
-  - Total PHQ-9 depression score
-  - Binary depression indicator (PHQ-9 ≥ 10)
-  - Depression severity classification
+  - `DPQ010`–`DPQ090` — PHQ-9 depression symptom items
+  - Derived:
+    - `phq9_score` — Total depression score (0–27)
+    - `is_depressed` — Binary indicator (PHQ-9 ≥ 10)
+    - `phq9_severity` — Categorical classification (None, Mild, Moderate, etc.)
 
 - **Inflammation (`HSCRP_L`)**
-  - High-sensitivity C-reactive protein (CRP)
+  - `LBXHSCRP` — High-sensitivity C-Reactive Protein (CRP, mg/dL)
 
 - **Body Measures (`BMX_L`)**
-  - Body Mass Index (BMI)
+  - `BMXBMI` — Body Mass Index (BMI, kg/m²)
 
 - **Smoking – Cigarette Use (`SMQ_L`)**
-  - Number of cigarettes smoked per day
+  - `SMD641` — Number of cigarettes smoked per day
+  - Cleaned: `99` (unknown) recoded as `NA`
 
 - **Physical Activity (`PAQ_L`)**
-  - Minutes of vigorous activity (`PAD680`)
-  - Frequency and units of moderate activity (`PAD810Q`, `PAD810U`)
-  - Duration of moderate activity (`PAD820`)
+  - `PAD680` — Total minutes of vigorous-intensity activity per week
+  - `PAD810Q` — Frequency of moderate-intensity activity sessions
+  - `PAD810U` — Time units for frequency (`D`, `W`, `M`, `Y`)
+  - `PAD820` — Duration (in minutes) per moderate session
+  - Derived:
+    - `vigorous_activity_minutes` — From `PAD680`
+    - `vigorous_activity_category` — Yes/No based on reported activity
+    - `moderate_activity_frequency` — Based on `PAD810Q`
+    - `moderate_activity_minutes` — Composite of frequency × duration
 
 - **Occupation (`OCQ_L`)**
-  - Work status (`OCD150`)
+  - `OCD150` — Current employment status
+  - Derived: `employment_status` — Working / Not working
 
 ---
 
