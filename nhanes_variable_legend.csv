@@ -34,5 +34,6 @@ PAD810U,Units for moderate activity frequency (D/W/M/Y)
 moderate_activity_units,Cleaned version of PAD810U (Per day/week/month/year)
 PAD820,Minutes per moderate activity session
 moderate_activity_minutes,Cleaned version of PAD820
-OCD150,Employment status (1–5 = Working / Not Working)
+OCD150,Employment status (1–4 = Working / Not Working) -- tells us about their work type/situation
 employment_status,Categorized from OCD150: Working or Not working
+
